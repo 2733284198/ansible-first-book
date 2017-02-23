@@ -1,6 +1,6 @@
-# Ansible的 Host Inventory 
+# Ansible的 Host Inventory（主机清单）
 
-## 什么是 Host Inventory （ 主机目录 、主机清单）？
+## 什么是 Host Inventory （主机清单）？
 
  Host Inventory 是配置文件，用来告诉Ansible需要管理哪些主机。并且把这些主机根据按需分类。
 
@@ -38,4 +38,3 @@ two.example.com
 three.example.com
 
 ```
-
