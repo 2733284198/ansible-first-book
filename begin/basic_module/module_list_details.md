@@ -1,28 +1,31 @@
 # 介绍几个常用的module
 
-学习Linux操作系统，如果不能一些基本的命令，那么真的没有办法用Linux。所以学习Ansible也非常有必要了解一些常用的module。
+学习Linux操作系统，如果不懂一些基本的命令，那么真的没有办法用Linux。所以学习Ansible也非常有必要了解一些常用的module。
 
 接下来介绍一些会在接下来的章节中用到的module，也是很常用的module。
 
 调试和测试类的module
+
 * ping - ping一下你的远程主机，如果可以通过ansible成功连接，那么返回pong
 * debug - 用于调试的module，只是简单打印一些消息，有点像linux的echo命令。
 
 文件类的module
+
 * copy - 从本地拷贝文件到远程节点
 * template - 从本地拷贝文件到远程节点，并进行变量的替换
 * file - 设置文件的属性
 
 linux上常用的操作
+
 * user - 管理用户账户
 * yum - red hat系linux上的包管理
 * service - 管理服务
 * firewalld - 管理防火墙中的服务和端口
 
 执行Shell命令
-* shell - 在节点上执行shell命令，支持$HOME和"<", ">", "|", ";" and "&"
-* command - 在远程节点上面执行命令，不支持$HOME和"<", ">", "|", ";" and "&"
 
+* shell - 在节点上执行shell命令，支持$HOME和"&lt;", "&gt;", "\|", ";" and "&"
+* command - 在远程节点上面执行命令，不支持$HOME和"&lt;", "&gt;", "\|", ";" and "&"
 
 ## ping
 
@@ -70,29 +73,26 @@ ok: [localhost] => {
 
   执行结果：
 
-
-  ```
+```
   TASK [Display part of variables/facts known for a host] ************************
   ok: [localhost] => {
       "hostvars[inventory_hostname][\"ansible_default_ipv4\"][\"gateway\"]": "192.168.50.1"
   }
-  ```
+```
 
 * 打印动态注入的变量
 
-
-  ```
+```
   - shell: /usr/bin/uptime
     register: result
 
   - debug:
       var: result
-  ```
+```
 
-  执行结果
-  
+执行结果
 
-  ```
+```
   TASK [command] *****************************************************************
   changed: [localhost]
 
@@ -114,9 +114,10 @@ ok: [localhost] => {
           "warnings": []
       }
   }
-  ```
+```
 
 ## copy
+
 从当前的机器上copy静态文件到远程节点上，并且设置合理的文件权限。注意，copy module拷贝文件的时候，会先比较下文件的checksum，如果相同则不会拷贝，返回状态OK；如果不同才会拷贝，返回状态为changed。
 
 ### 设置文件权限
@@ -147,7 +148,7 @@ backup参数为yes的时候，如果发生了拷贝操作，那么会先备份�
 
 validate参数接需要验证的命令。一般需要验证拷贝后的文件，所以%s可以指代拷贝后的文件。当copy module中加入了validate参数，不仅需要成功拷贝文件，还需要validate命令返回成功的状态，整个module的执行状态才是成功。
 
-```visudo -cf /etc/sudoers```是验证sudoers文件有没有语法错误的命令。
+`visudo -cf /etc/sudoers`是验证sudoers文件有没有语法错误的命令。
 
 ```
 - copy:
@@ -155,17 +156,18 @@ validate参数接需要验证的命令。一般需要验证拷贝后的文件，
     dest: /etc/sudoers
     validate: 'visudo -cf %s'
 ```
+
 ## template
 
 如果你需要拷贝一个静态的文件，那么用copy module就够用了。但是如果你需要拷贝一个文件，并且根据需要部分内容，那么就需要用到template module啦。
 
 比如安装apache后，你需要给节点拷贝一个测试页面index.html,index.html里面需要显示当前节点的主机名和IP,这时候就需要用到template。
 
-index.html中，你需要指定你想替换的哪个部分，那么这个部分用变量来表示，template使用的是python的j2模版引擎，你不需要了解什么是j2，你只需要知道表量的表示法是```{{}}```就可以了。
+index.html中，你需要指定你想替换的哪个部分，那么这个部分用变量来表示，template使用的是python的j2模版引擎，你不需要了解什么是j2，你只需要知道表量的表示法是`{{}}`就可以了。
 
 ### template文件语法
 
-index.html具体应该怎么写呢，既然是tamplate文件，那么我们就加一个后缀提高可读性，index.html.j2。下面文件中使用了两个变量ansible_hostname和ansible_default_ipv4.address。
+index.html具体应该怎么写呢，既然是tamplate文件，那么我们就加一个后缀提高可读性，index.html.j2。下面文件中使用了两个变量ansible\_hostname和ansible\_default\_ipv4.address。
 
 ```
 <html>
@@ -183,7 +185,7 @@ index.html具体应该怎么写呢，既然是tamplate文件，那么我们就�
 
 ### 使用facts变量的template
 
-在index.html.j2使用的两个变量ansible_hostname和ansible_default_ipv4.address都是facts变量，ansible会替我们搜索，直接可以在playbook中使用，当然也可以直接在template中使用。所以我们在写template语句中无需传入参数。
+在index.html.j2使用的两个变量ansible\_hostname和ansible\_default\_ipv4.address都是facts变量，ansible会替我们搜索，直接可以在playbook中使用，当然也可以直接在template中使用。所以我们在写template语句中无需传入参数。
 
 ```
 - name: Write the default index.html file
@@ -194,7 +196,7 @@ index.html具体应该怎么写呢，既然是tamplate文件，那么我们就�
 
 拷贝httpd.conf.j2拷贝到远程节点，根据需求设置默认的http端口，这时我们就需要用到普通的变量。
 
-在httpd.conf.j2模版文件中，所有变量的是用方法都是一样的，都是是用```{{}}```:
+在httpd.conf.j2模版文件中，所有变量的是用方法都是一样的，都是是用`{{}}`:
 
 ```
 ServerRoot "/etc/httpd"
@@ -214,12 +216,11 @@ Listen {{ http_port }}
 
   - name: Write the configuration file
     template: src=templates/httpd.conf.j2 dest=/etc/httpd/conf/httpd.conf
-  ```
+```
 
 ### 和copy module一样强大的功能
 
 当然copy module不仅可以简单的拷贝文件到远程节点，还可以进行权限设置，文件备份，以及验证功能，那么这些功能，template同样具备。
-
 
 ```
 - template:
@@ -253,6 +254,7 @@ file module设置远程值机上的文件、软链接（symlinks）和文件夹�
 ### 创建文件的软链接
 
 注意这里面的src和sest参数的含义是和copy module不一样的，file module里面所操作的文件都是远程节点上的文件。
+
 ```
 - file:
     src: /file/to/link/to
@@ -286,7 +288,6 @@ file module设置远程值机上的文件、软链接（symlinks）和文件夹�
 ## user
 
 user module可以增、删、改Linux远程节点的用户账户，并为其设置账户的属性。
-
 
 ### 增加账户
 
@@ -323,7 +324,7 @@ user module可以增、删、改Linux远程节点的用户账户，并为其设�
 
 ### 修改账户的属性
 
-* 为账户jsmith撞见一个 2048-bit的SSH key，放在~jsmith/.ssh/id_rsa
+* 为账户jsmith撞见一个 2048-bit的SSH key，放在~jsmith/.ssh/id\_rsa
 
   ```
   - user:
@@ -331,7 +332,7 @@ user module可以增、删、改Linux远程节点的用户账户，并为其设�
       generate_ssh_key: yes
       ssh_key_bits: 2048
       ssh_key_file: .ssh/id_rsa
-  ```   
+  ```
 
 * 为用户添加过期时间：
 
@@ -343,7 +344,6 @@ user module可以增、删、改Linux远程节点的用户账户，并为其设�
       expires: 1422403387
   ```
 
-
 ## yum
 
 yum module是用来管理red hat系的Linux上的安装包的，包括RHEL，CentOS，和fedora 21一下的版本。fedora从版本22开始就使用dnf，推荐使用dnf module来进行安装包的操作。
@@ -351,6 +351,7 @@ yum module是用来管理red hat系的Linux上的安装包的，包括RHEL，Cen
 ### 从yum源上安装和删除包
 
 * 安装最新版本的包，如果已经安装了老版本，那么会更新到最新的版本：
+
   ```
   - name: install the latest version of Apache
     yum:
@@ -418,11 +419,9 @@ yum module是用来管理red hat系的Linux上的安装包的，包括RHEL，Cen
     state: present
 ```
 
-
 ## service
 
 管理远程节点上的服务，什么是服务呢，比如httpd、sshd、nfs、crond等。
-
 
 ### 开、关、重起、重载服务
 
@@ -475,7 +474,6 @@ yum module是用来管理red hat系的Linux上的安装包的，包括RHEL，Cen
     args: eth0
 ```
 
-
 ## firewalld
 
 firewalld module为某服务和端口添加firewalld规则。firewalld中有正在运行的规则，和永久的规则，firewalld module都支持。
@@ -483,6 +481,7 @@ firewalld module为某服务和端口添加firewalld规则。firewalld中有正�
 firewalld要求远程节点上的firewalld版本在0.2.11以上。
 
 ### 为服务添加firewalld规则
+
 ```
 - firewalld:
     service: https
@@ -497,6 +496,7 @@ firewalld要求远程节点上的firewalld版本在0.2.11以上。
     permanent: true
     state: enabled
 ```
+
 ### 为端口号添加firewalld规则
 
 ```
@@ -545,23 +545,25 @@ firewalld要求远程节点上的firewalld版本在0.2.11以上。
     zone: dmz
 ```
 
-
 ## shell
 
 通过/bin/sh在远程节点上执行命令。如果一个操作你可以通过Module yum，copy操作实现，那么你不要使用shell或者command这样通用的命令module。因为通用的命令module不会根据具体操作的特点进行status的判断，所以当没有必要再重新执行的时候，它还是要重新执行一遍。
 
-### 支持$home，支持$HOME和"<", ">", "|", ";" and "&"。
+### 支持$home，支持$HOME和"&lt;", "&gt;", "\|", ";" and "&"。
+
 * 支持$home
   ```
   - name: test $home
     shell: echo "Test1" > ~/tmp/test1
   ```
-* 支持&&  
-  ```  
+* 支持&&
+
+  ```
   - shell: service jboss start && chkconfig jboss on
   ```
 
-* 支持>>
+* 支持&gt;&gt;
+
   ```
   - shell: echo foo >> /tmp/testfoo
   ```
@@ -569,6 +571,7 @@ firewalld要求远程节点上的firewalld版本在0.2.11以上。
 ### 调用脚本
 
 * 调用脚本
+
   ```
   - shell: somescript.sh >> somelog.txt
   ```
@@ -600,15 +603,18 @@ firewalld要求远程节点上的firewalld版本在0.2.11以上。
 
 ## Command
 
-在远程节点上执行命令。和Shell Module类似，不过不支持$HOME and operations like "<", ">", "|", ";" and "&"。
+在远程节点上执行命令。和Shell Module类似，不过不支持$HOME and operations like "&lt;", "&gt;", "\|", ";" and "&"。
 
 ### 和Shell一样
+
 * 像Shell一样调用单条命令
+
   ```
   - command: /sbin/shutdown -t now
   ```
 
 * 和Shell一样，可以在执行命令钱改变目录，并检查文件database不存在时再执行
+
   ```
   - command: /usr/bin/make_database.sh arg1 arg2
     args:
@@ -622,10 +628,14 @@ firewalld要求远程节点上的firewalld版本在0.2.11以上。
   ```
   - command: /usr/bin/make_database.sh arg1 arg2 creates=/path/to/database
   ```
-* 不支持&&和>>
+* 不支持&&和&gt;&gt;
 
   下面的写法，没有办法创建~/tmp/test3和~/tmp/test4的
+
   ```
   - name: test $home
     command: echo "test3" > ~/tmp/test3 && echo "test4" > ~/tmp/test4
   ```
+
+
+
