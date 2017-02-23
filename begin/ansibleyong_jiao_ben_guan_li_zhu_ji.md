@@ -1,6 +1,6 @@
 # Ansible用脚本管理主机
 
-只有脚本才可以重用，避免总敲重复的代码。Ansible脚本的名字叫Playbook，使用的是YAML的格式，文件以yml结尾。
+为了避免重复输入命令，Ansible提供脚本功能。Ansible脚本的名字叫Playbook，使用的是YAML的格式，文件以yml结尾。
 
 注解：YAML和JSON类似，是一种表示数据的格式。
 
@@ -22,16 +22,13 @@ deploy.yml的功能为web主机部署apache, 其中包含以下部署步骤：
 playbook deploy.yml包含下面几个关键字，每个关键字的含义：
 
 * **hosts**：为主机的IP，或者主机组名，或者关键字all
-* **remote_user**: 以哪个用户身份执行。
+* **remote\_user**: 以哪个用户身份执行。
 * **vars**： 变量
 * **tasks**: playbook的核心，定义顺序执行的动作action。每个action调用一个ansbile module。
 
 * > action 语法： `module： module_parameter=module_value`
-
 * > 常用的module有yum、copy、template等，module在ansible的作用，相当于bash脚本中yum，copy这样的命令。下一节会介绍。
-
 * **handers**： 是playbook的event，默认不会执行，在action里触发才会执行。多次触发只执行一次。
-
 
 ```yaml
 ---
@@ -57,7 +54,6 @@ playbook deploy.yml包含下面几个关键字，每个关键字的含义：
   handlers:
     - name: restart apache
       service: name=httpd state=restarted
-
 ```
 
 ---
@@ -105,3 +101,4 @@ playbook deploy.yml包含下面几个关键字，每个关键字的含义：
 ```
 
 提供json和yml互转的在线网站： [http://www.json2yaml.com/](http://www.json2yaml.com/)
+
