@@ -584,7 +584,7 @@ firewalld要求远程节点上的firewalld版本在0.2.11以上。
       chdir: somedir/
   ```
 
-* 在执行命令钱改变工作目录，并且在文件somelog.txt不存在时执行命令。
+* 在执行命令前改变工作目录，且仅在文件somelog.txt不存在时才执行该action。
 
   ```
   - shell: somescript.sh >> somelog.txt
