@@ -74,7 +74,7 @@ task中每个action会调用一个module，在module中会去检查当前系统�
 
 module的执行状态的具体判断规则由各个module自己决定和实现的。例如，"copy" module的判断方法是比较文件的checksum，代码如下：
 
-[https:\/\/github.com\/ansible\/ansible-modules-core\/blob\/devel\/files\/copy.py](https://github.com/ansible/ansible-modules-core/blob/devel/files/copy.py)
+[https://github.com/ansible/ansible-modules-core/blob/devel/files/copy.py](https://github.com/ansible/ansible-modules-core/blob/devel/files/copy.py)
 
 ### 状态示例
 
@@ -93,9 +93,9 @@ TASK的状态是changed
 
 第二次执行是下面这个样子的:
 
-TASK的状态是ok,由于第一次执行copy\_hosts.yml的时候,已经拷贝过文件,那么ansible目标文件的状态避免重复执行.
+TASK的状态是ok,由于第一次执行copy_hosts.yml的时候,已经拷贝过文件,那么ansible目标文件的状态避免重复执行.
 ![](copy_hosts_2nd.png)
 
-下面我更改vm-rhel7-1的\/etc\/hosts, 再次执行看看:
+下面我更改vm-rhel7-1的/etc/hosts, 再次执行看看:
 
 ![](copy_hosts_3rd.png)

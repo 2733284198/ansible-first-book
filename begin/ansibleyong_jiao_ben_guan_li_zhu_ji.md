@@ -22,7 +22,7 @@ deploy.yml的功能为web主机部署apache, 其中包含以下部署步骤：
 playbook deploy.yml包含下面几个关键字，每个关键字的含义：
 
 * **hosts**：为主机的IP，或者主机组名，或者关键字all
-* **remote\_user**: 以哪个用户身份执行。
+* **remote_user**: 以哪个用户身份执行。
 * **vars**： 变量
 * **tasks**: playbook的核心，定义顺序执行的动作action。每个action调用一个ansbile module。
 
@@ -104,4 +104,4 @@ playbook deploy.yml包含下面几个关键字，每个关键字的含义：
 ]
 ```
 
-提供json和yml互转的在线网站： [http:\/\/www.json2yaml.com\/](http://www.json2yaml.com/)
+提供json和yml互转的在线网站： [http://www.json2yaml.com/](http://www.json2yaml.com/)

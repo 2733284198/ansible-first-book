@@ -2,7 +2,7 @@
 
 你[Ansible Module文档](http://docs.ansible.com/ansible/modules_by_category.html)上查看单个Module的时候,每一个Module文档的底部都会标识, 这是一个"Core Module", 或者这是一个"Extra Module".
 
-比如, [yum](http://docs.ansible.com/ansible/yum_module.html)就是一个core module, [yum\_repository](http://docs.ansible.com/ansible/yum_repository_module.html)就是一个extra module,
+比如, [yum](http://docs.ansible.com/ansible/yum_module.html)就是一个core module, [yum_repository](http://docs.ansible.com/ansible/yum_repository_module.html)就是一个extra module,
 
 ## Core Module
 

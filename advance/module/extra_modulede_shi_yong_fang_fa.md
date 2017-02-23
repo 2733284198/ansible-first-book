@@ -45,7 +45,7 @@ library = library/ansible-modules-extras/
 export ANSIBLE_LIBRARY=/project/demo/demoansible/library/ansible-module-extras
 ```
 
-如果需要在重启后生效，那么放在~/.bashrc中声明ANSIBLE\_LIBRARY变量：
+如果需要在重启后生效，那么放在~/.bashrc中声明ANSIBLE_LIBRARY变量：
 
 ```
 $ echo >>~/.bashrc <<EOF

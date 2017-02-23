@@ -53,9 +53,9 @@
    ![](https://www.ansible.com/hs-fs/hubfs/2016_Images/Resources/tower-setup-guide-4.png?t=1482430738929&width=426&height=201&name=tower-setup-guide-4.png)
 
 5. 给主机命名，然后添加连接的变量。  
-   ansible默认的连接方式是ssh，如果用ssh不需要添加参数。连接本机是不走ssh协议的，所以需要添加一个ansible\_connection变量来告诉ansible不要用ssh，而是用local的方式直接控制本地。
+   ansible默认的连接方式是ssh，如果用ssh不需要添加参数。连接本机是不走ssh协议的，所以需要添加一个ansible_connection变量来告诉ansible不要用ssh，而是用local的方式直接控制本地。
 
-   更多的非ssh的连接方式可以参考官方文档中的 [ansible\_connection参数说明](http://docs.ansible.com/ansible/intro_inventory.html#non-ssh-connection-types)
+   更多的非ssh的连接方式可以参考官方文档中的 [ansible_connection参数说明](http://docs.ansible.com/ansible/intro_inventory.html#non-ssh-connection-types)
 
    ![](https://www.ansible.com/hs-fs/hubfs/2016_Images/Resources/tower-setup-guide-5.png?t=1482430738929&width=495&height=300&name=tower-setup-guide-5.png)
 

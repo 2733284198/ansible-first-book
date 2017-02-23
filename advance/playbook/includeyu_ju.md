@@ -90,9 +90,9 @@ tasks:
   然而为什么有一处文档里面写可以调用。文档下面两个地方提到include里面的handlers，但是两处是矛盾的:
 
   * hander的文档写不能调用
-    [http://docs.ansible.com/ansible/playbooks\_intro.html](http://docs.ansible.com/ansible/playbooks_intro.html)
+    [http://docs.ansible.com/ansible/playbooks_intro.html](http://docs.ansible.com/ansible/playbooks_intro.html)
   * include的文档写能调用
-    [http://docs.ansible.com/ansible/playbooks\_roles.html\#task-include-files-and-encouraging-reuse](http://docs.ansible.com/ansible/playbooks_roles.html#task-include-files-and-encouraging-reuse)
+    [http://docs.ansible.com/ansible/playbooks_roles.html#task-include-files-and-encouraging-reuse](http://docs.ansible.com/ansible/playbooks_roles.html#task-include-files-and-encouraging-reuse)
 
   通过下面的例子实测后，基于ansible1.9是不能调用include里面的handler的，不过基于ansible2.0+是可以调用include里面的handler的。所以在使用的时候注意你安装的ansible版本。
 
