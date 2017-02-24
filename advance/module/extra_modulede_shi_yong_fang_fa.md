@@ -1,8 +1,8 @@
 # Extra module的使用方法
 
-使用Exra module需要进行下面的配置，就可以在命令行或者是playbook中使用了。配置后extra module使用方法和core module的使用方法是一样的。
+使用Exra module需要进行下面的配置，就可以在命令行playbook中使用了。配置后extra module使用方法和core module的使用方法是一样的。
 
-[注]Ansible 2.3以后，Extra module的使用就和core module一样了，无需任何额外的配置，直接在playbook和命令行中使用。其实Ansible团队会一直致力于把成熟的长期使用没有问题的Module放入Core Module中，方便客户的使用。所以当你的Playbok运行报错是没有相应的module时，你只要心中有数可能出现问题的地方和解决方案就可以。
+\[注\]部分Extra module经过一段时间的测试，就会放到Core module。其实Ansible团队会一直致力于把成熟的长期使用没有问题的Module放入Core Module中，方便客户的使用。所以当你的Playbok运行报错是没有相应的module时，你只要知道可能出现问题的地方和解决方案就可以。
 
 **1 下载ansible module extra项目**
 
@@ -45,7 +45,7 @@ library = library/ansible-modules-extras/
 export ANSIBLE_LIBRARY=/project/demo/demoansible/library/ansible-module-extras
 ```
 
-如果需要在重启后生效，那么放在~/.bashrc中声明ANSIBLE_LIBRARY变量：
+如果需要在重启后生效，那么放在~/.bashrc中声明ANSIBLE\_LIBRARY变量：
 
 ```
 $ echo >>~/.bashrc <<EOF
@@ -56,3 +56,6 @@ EOF
 
 $ source ~/.bashrc
 ```
+
+
+
