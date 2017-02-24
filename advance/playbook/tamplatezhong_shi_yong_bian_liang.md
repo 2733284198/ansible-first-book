@@ -1,7 +1,6 @@
 # 文件模板中使用的变量
 
-
-template module在Ansible中非常常用，而它在使用的时候又没有显示的指定template文件中的值，所以有时候用户会对template文件中使用的变量感到困惑，所以在这里又重新强调下。
+template module在Ansible中很常用，而它在使用的时候又没有显式的指定template文件中的值，有时候用户会对template文件中使用的变量感到困惑，所以在这里再次强调下。
 
 ## template变量的定义
 
@@ -36,19 +35,20 @@ template module在Ansible中非常常用，而它在使用的时候又没有显�
   handlers:
     - name: restart apache
       service: name=httpd state=restarted
-
 ```
+
 ## template变量的使用
 
 Ansible模版文件使用变量的语法是Python的template语言[Jinja2](http://jinja.pocoo.org/docs/dev/templates/#builtin-filters)。
 
 在下面的例子template index.html.j2中，直接使用了以下变量：
 
-* 系统变量 ** \{\{ ansible_hostname \}\} **, ** \{\{ ansible_default_ipv4.address \}\} **
+* 系统变量 ** {{ ansible\_hostname }} **, ** {{ ansible\_default\_ipv4.address }} **
 
-* 用户自定义的变量 ** \{\{ defined_name \}\} **
+* 用户自定义的变量 ** {{ defined\_name }} **
 
-index.html.j2文件：  
+index.html.j2文件：
+
 ```
 <html>
 <title>Demo</title>
@@ -61,6 +61,7 @@ index.html.j2文件：
 </div>
 </body>
 </html>
-
-
 ```
+
+
+
