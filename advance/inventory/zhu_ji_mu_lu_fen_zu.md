@@ -19,10 +19,9 @@ www[01:50].example.com
 
 [databases]
 db-[a:f].example.com
-
 ```
 
-分组usa的子组还可以是其它的组,例如\[usa:children\]中还可以子组southeast, \[southeast:children\]中还可以包含atlanta和releigh
+分组usa的子组还可以是其它的组,例如\[usa:children\]中还可以包含southeast子组, \[southeast:children\]中还可以包含atlanta和releigh
 
 ```
 [atlanta]
@@ -43,6 +42,7 @@ southeast
 northeast
 southwest
 northwest
-
 ```
+
+
 
