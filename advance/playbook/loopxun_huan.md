@@ -23,7 +23,7 @@ tasks:
    with_items: "{{somelist}}"
 ```
 
-使用 ‘with_items’ 用于迭代的条目类型不仅仅支持简单的字符串列表.如果你有一个哈希列表,那么你可以用以下方式来引用子项:
+使用 ‘with\_items’ 用于迭代的条目类型不仅仅支持简单的字符串列表.如果你有一个哈希列表,那么你可以用以下方式来引用子项:
 
 ```
 - name: add several users
@@ -33,7 +33,7 @@ tasks:
     - { name: 'testuser2', groups: 'root' }
 ```
 
-注意：如果同时使用 when 和 with_items （或其它循环声明）,`when`声明会为每个条目单独执行.请参见 the_when_statement 示例.
+注意：如果同时使用 when 和 with\_items （或其它循环声明）,`when`声明会为每个条目单独执行.请参见 the\_when\_statement 示例.
 
 ## 嵌套循环
 
@@ -62,12 +62,13 @@ tasks:
 ```
 ---
 vars:
-  alice:
-    name: Alice Appleworth
-    telephone: 123-456-7890
-  bob:
-    name: Bob Bananarama
-    telephone: 987-654-3210
+  users:
+    alice:
+      name: Alice Appleworth
+      telephone: 123-456-7890
+    bob:
+      name: Bob Bananarama
+      telephone: 987-654-3210
 tasks:
   - name: Print phone records
     debug: msg="User {{ item.key }} is {{ item.value.name }} ({{ item.value.telephone }})"
@@ -76,7 +77,7 @@ tasks:
 
 ## 对文件列表使用循环
 
-with_fileglob 可以以非递归的方式来模式匹配单个目录中的文件.如下面所示:
+with\_fileglob 可以以非递归的方式来模式匹配单个目录中的文件.如下面所示:
 
 ```
 tasks:
