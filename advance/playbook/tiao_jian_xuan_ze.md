@@ -4,7 +4,7 @@
 
 ## When语句
 
-有时候用户有可能需满足特定条件才执行某一个特定的步骤。在某一个特定版本的系统上装包，或者只在磁盘空间满了的文件系统上执行清理操作一样。这些操作在Ansible上，使用`when`语句都非常简单.
+有时候用户有可能需满足特定条件才执行某一个特定的步骤。例如，在某个特定版本的系统上装包，或者只在磁盘空间满了的文件系统上执行清理操作。这些操作在Playbook中用when语句实现。
 
 主机为Debian Linux立刻关机
 
@@ -88,7 +88,6 @@ tasks:
 ```
 - include: tasks/sometasks.yml
   when: "'reticulating splines' in output"
-
 ```
 
 ## 与Role一起用
@@ -97,6 +96,7 @@ tasks:
 - hosts: webservers
   roles:
      - { role: debian_stock_config, when: ansible_os_family == 'Debian' }
-
 ```
+
+
 
