@@ -1,6 +1,6 @@
 # 用tags实现执行playbook中部分tasks
 
-如果playbook文件比较大，在执行的时候只是想执行部分功能，这个时候没有有解决方案呢？Playbook提供了tags变迁可以实现部分运行。
+如果playbook文件比较大，在执行的时候只是想执行部分功能，这个时候没有有解决方案呢？Playbook提供了tags便签可以实现部分运行。
 
 ## tags的基本用法
 
@@ -31,6 +31,7 @@ tasks:
   ```
   ansible-playbook example.yml
   ```
+
 * 指定执行安装部分的tasks，则可以利用关键字tags
 
   ```
@@ -70,6 +71,7 @@ tasks:
   ```
 
   指定运行packages时，还是会执行always tag对应的tasks
+
   ```
   ansible-playbook tags_always.yml --tags "packages"
   ```
@@ -87,6 +89,7 @@ tasks:
   ```
 
   分别指定--tags为“tagged”，“untagged”和“all”试下效果吧：
+
   ```
   ansible-playbook tags_tagged_untagged_all.yml --tags tagged
   ```
@@ -114,3 +117,6 @@ include语句指定执行的tags的语法：
 roles:
   - { role: webserver, port: 5000, tags: [ 'web', 'foo' ] }
 ```
+
+
+
